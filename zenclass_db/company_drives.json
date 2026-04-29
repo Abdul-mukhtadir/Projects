@@ -1,0 +1,18 @@
+[
+  {
+    "company": "Google",
+    "date": "2020-10-20T00:00:00Z",
+    "students_appeared": [
+      "64a1",
+      "64a2"
+    ]
+  },
+  {
+    "company": "Amazon",
+    "date": "2020-10-25T00:00:00Z",
+    "students_appeared": [
+      "64a2",
+      "64a3"
+    ]
+  }
+]

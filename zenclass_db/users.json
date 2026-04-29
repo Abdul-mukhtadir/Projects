@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "64a1",
+    "name": "Abdul",
+    "email": "abdul@gmail.com",
+    "batch": "B40",
+    "mentor_id": "m1"
+  },
+  {
+    "_id": "64a2",
+    "name": "Rahul",
+    "email": "rahul@gmail.com",
+    "batch": "B40",
+    "mentor_id": "m1"
+  },
+  {
+    "_id": "64a3",
+    "name": "Sneha",
+    "email": "sneha@gmail.com",
+    "batch": "B41",
+    "mentor_id": "m2"
+  }
+]

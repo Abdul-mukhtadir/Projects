@@ -1,0 +1,17 @@
+[
+  {
+    "user_id": "64a1",
+    "problems_solved": 50,
+    "date": "2020-10-10T00:00:00Z"
+  },
+  {
+    "user_id": "64a2",
+    "problems_solved": 30,
+    "date": "2020-10-20T00:00:00Z"
+  },
+  {
+    "user_id": "64a1",
+    "problems_solved": 20,
+    "date": "2020-10-25T00:00:00Z"
+  }
+]

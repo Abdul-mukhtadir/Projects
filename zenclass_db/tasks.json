@@ -1,0 +1,19 @@
+[
+  {
+    "topic_id": "t1",
+    "task": "Create HTML page",
+    "date": "2020-10-06T00:00:00Z",
+    "submitted_users": [
+      "64a1",
+      "64a2"
+    ]
+  },
+  {
+    "topic_id": "t2",
+    "task": "Design MongoDB schema",
+    "date": "2020-10-16T00:00:00Z",
+    "submitted_users": [
+      "64a1"
+    ]
+  }
+]
