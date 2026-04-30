@@ -1,0 +1,124 @@
+ Questions & Queries
+
+1. Find all the topics and tasks which are taught in the month of October
+
+Topics Query (Filter - topics collection):
+{
+  "date": {
+    "$gte": { "$date": "2020-10-01T00:00:00Z" },
+    "$lte": { "$date": "2020-10-31T00:00:00Z" }
+  }
+}
+
+Tasks Query (Filter - tasks collection):
+{
+  "date": {
+    "$gte": { "$date": "2020-10-01T00:00:00Z" },
+    "$lte": { "$date": "2020-10-31T00:00:00Z" }
+  }
+}
+
+
+2. Find all the company drives which appeared between 15 Oct-2020 and 31-Oct-2020
+
+Query (Filter - company_drives collection):
+{
+  "date": {
+    "$gte": { "$date": "2020-10-15T00:00:00Z" },
+    "$lte": { "$date": "2020-10-31T00:00:00Z" }
+  }
+}
+
+
+3. Find all the company drives and students who appeared for placement
+
+Query (Aggregation - company_drives collection):
+[
+  {
+    "$lookup": {
+      "from": "users",
+      "localField": "students_appeared",
+      "foreignField": "_id",
+      "as": "students"
+    }
+  }
+]
+
+
+4. Find the number of problems solved by each user in codekata
+
+Query (Aggregation - codekata collection):
+[
+  {
+    "$group": {
+      "_id": "$user_id",
+      "total_problems": { "$sum": "$problems_solved" }
+    }
+  }
+]
+
+
+5. Find all the mentors who have more than 15 mentees
+
+Query (Aggregation - users collection):
+[
+  {
+    "$group": {
+      "_id": "$mentor_id",
+      "mentee_count": { "$sum": 1 }
+    }
+  },
+  {
+    "$match": {
+      "mentee_count": { "$gt": 15 }
+    }
+  }
+]
+
+
+6. Find the number of users who are absent and task is not submitted between 15 Oct-2020 and 31-Oct-2020
+
+Query (Aggregation - attendance collection):
+[
+  {
+    "$match": {
+      "status": "absent",
+      "date": {
+        "$gte": { "$date": "2020-10-15T00:00:00Z" },
+        "$lte": { "$date": "2020-10-31T00:00:00Z" }
+      }
+    }
+  },
+  {
+    "$lookup": {
+      "from": "tasks",
+      "let": { "userId": "$user_id" },
+      "pipeline": [
+        {
+          "$match": {
+            "date": {
+              "$gte": { "$date": "2020-10-15T00:00:00Z" },
+              "$lte": { "$date": "2020-10-31T00:00:00Z" }
+            }
+          }
+        },
+        {
+          "$match": {
+            "$expr": {
+              "$not": { "$in": ["$$userId", "$submitted_users"] }
+            }
+          }
+        }
+      ],
+      "as": "not_submitted_tasks"
+    }
+  },
+  {
+    "$match": {
+      "not_submitted_tasks": { "$ne": [] }
+    }
+  },
+  {
+    "$count": "users_absent_and_not_submitted"
+  }
+]
